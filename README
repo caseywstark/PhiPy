@@ -1,0 +1,51 @@
+##################
+PhiPy Instructions
+##################
+
+_June 22, 2010_
+
+These are some notes for whoever will take on this project I worked on with Dr. Kresin in the USC Department of Physics and Astronomy.
+
+The `Chaco <http://code.enthought.com/chaco/>`_ interface code is in this directory and the plots for the Indium cluster photoionization data are in `plots/` (as .gif images).
+
+
+Requirements
+============
+
+ - Python2.6 (maybe works down to 2.3, but 2.6 is suggested)
+ - Enthought suite (for Triats, Chaco, and SciPy)
+ - git for version control (not necessary, but highly recommended)
+
+
+Getting and Using PhiPy
+=======================
+
+Download PhiPy from the project homepage or use
+    git clone git://github.com/caseywstark/PhiPy.git
+
+cd into the directory with terminal and
+    python project.py
+will start PhiPy
+
+
+Interface
+=========
+
+ 1. Choose the data set to analyze using the drop-down at the top
+ 2. Adjust initial parameters for the fit and find the “sweet spots”. Phi is the most important, but it’s good to test all of them, including the order of the expansion.
+ 3. Use the “control” sliders at the bottom to adjust the parameters used to generate the plots to test their effect.
+
+
+To _pan_ the plots, right click and hold on one and move the mouse.
+To _zoom_ the plots, mouse over one and use the scroll wheel.
+
+
+Todo
+====
+
+ - Improving the quality of the fit. I didn’t get into the details of how minpack (the Fortran routine scipy.optimize.leastsq users) really works, so it would be really helpful to figure out why the fit diverges given certain initial parameters.
+ - Set fit bounds so that minpack doesn’t waste time searching outside of a reasonable parameter space (like cranking up the temp > 3000 K or phi > 10 eV)
+ - Unit tests. It’s not necessary (at all), but it would really improve my confidence in the code. Doing things like checking units in the fowler.py code would be really slick.
+ - A new data backend. Currently the data is stored in a dictionary in data.py. This is horribly crude and will be difficult to maintain once the dataset gets larger. It would be much better to put this in a document/key-value store database like CouchDB or Cassandra.
+ - Figure out what’s up with the universal curve. No idea what happens for `mu` < 0.
+
